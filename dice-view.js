@@ -16,6 +16,27 @@
 || Utiliser Design
 */
 
+/*Fonction Miro*/
+//Permet de récupérer le nom de l'utilisateur en cours
+
+function getMiroAccount(miroToken, teamToken)
+{
+
+ const options = 
+       {
+         headers: {'Authorization': `Bearer ${miroToken}`}
+       };
+  return fetch(`${teamToken}/boards?limit=10&offset=0`, options)
+      .then(res => res.json())
+      .then(json => json.data.currentUserConnection.user.name)
+};
+
+//Perment de récupérer le miroToken et le teamToken, suite à l'autorisation de connexion du serveur
+
+function getTokens()
+{
+  return miroToken, teamToken;
+};
 
 /* Elements */
 const inputReply = document.getElementById('inputReply');
