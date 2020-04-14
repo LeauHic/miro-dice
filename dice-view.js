@@ -1,4 +1,23 @@
 
+/*Spécifique Miro*/
+
+//Perment de récupérer le miroToken et le teamId, suite à l'autorisation de connexion du serveur
+ const miroToken connexionRes.access_token
+ const teamId = connexionRes.team_id
+
+
+//Permet de récupérer le nom de l'utilisateur en cours
+function getMiroAccount(miroToken, teamId)
+{
+ const options = 
+       {
+         headers: {'Authorization': `Bearer ${miroToken}`}
+       };
+  return fetch(`${teamToken}/boards?limit=10&offset=0`, options)
+      .then(res => res.json())
+      .then(json => json.data.currentUserConnection.user.name)
+};
+
 /*
 || Reply :  String envoyé sur le tchat
 || Roll  :  2D6+6-2
@@ -16,29 +35,8 @@
 || Utiliser Design
 */
 
-/*Fonction Miro*/
-//Permet de récupérer le nom de l'utilisateur en cours
-
-function getMiroAccount(miroToken, teamToken)
-{
-
- const options = 
-       {
-         headers: {'Authorization': `Bearer ${miroToken}`}
-       };
-  return fetch(`${teamToken}/boards?limit=10&offset=0`, options)
-      .then(res => res.json())
-      .then(json => json.data.currentUserConnection.user.name)
-};
-
-//Perment de récupérer le miroToken et le teamToken, suite à l'autorisation de connexion du serveur
-
-function getTokens()
-{
-  return miroToken, teamToken;
-};
-
 /* Elements */
+
 const inputReply = document.getElementById('inputReply');
 const buttonReply = document.getElementById('buttonReply');
 
@@ -212,7 +210,7 @@ function showRollsDetails() {
 
 let renderReply = function (replies) {
   return `
-    <div class="dicetray__reply-username">Khü</div>
+    <div class="dicetray__reply-username">${getMiroAccount(miroToken, teamId)}</div>
     <div class="dicetray__reply-rolls">
       ${replies.join('')}
     </div>
